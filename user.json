@@ -1,0 +1,8 @@
+{
+  "id": 1,
+  "firstname": "John",
+  "lastname": "Doe",
+  "email": "johndoe@gmail.com",
+  "role": "none",
+  "profilepic": "/profileImages/user_1_profile.png"
+}
