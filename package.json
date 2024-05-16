@@ -1,5 +1,5 @@
 {
-  "name": "blogapi",
+  "name": "blog_api",
   "version": "1.0.0",
   "description": "A blog api server in node",
   "main": "app.js",
