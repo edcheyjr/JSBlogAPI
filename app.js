@@ -32,18 +32,18 @@ app.use(cors())
 // using json as the method of sending response
 app.use(bodyParser.json())
 
-// blog routes initialization
-app.use('/blogs', blogRoutes)
-
-// users routes initialization
-app.use('/users', userRoutes)
-
-//  auth routes initialization
-app.use('/auth', authRoutes)
-
 //swagger ui endpoint
 // Serve Swagger UI at /api-docs
-app.use('', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+
+// blog routes initialization
+app.use(`/api/${appVersion}/blogs`, blogRoutes)
+
+// users routes initialization
+app.use(`/api/${appVersion}/users`, userRoutes)
+
+//  auth routes initialization
+app.use(`/api/${appVersion}/auth`, authRoutes)
 
 // setting the listening port
 app.listen(PORT, () => {
