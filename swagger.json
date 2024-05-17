@@ -715,9 +715,27 @@
           }
         }
       },
+      "CreateBlog": {
+        "type": "object",
+        "required": ["title", "body"],
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "My First Blog"
+          },
+          "description": {
+            "type": "string",
+            "example": "This is a description of my first blog."
+          },
+          "body": {
+            "type": "string",
+            "example": "This is the content of my first blog."
+          }
+        }
+      },
       "Blog": {
         "type": "object",
-        "required": ["description"],
+        "required": [],
         "properties": {
           "id": {
             "type": "string",
