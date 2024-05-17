@@ -1,4 +1,5 @@
 import Blog from '../models/blog.model.js'
+import { logMessage, logObjectData } from '../utils/logging.js'
 
 // Create and Save a new  Blog
 const createBlog = async (req, res) => {
@@ -13,6 +14,7 @@ const createBlog = async (req, res) => {
       message: 'blog content can not be empty',
     })
   }
+  logMessage(`attempting to create blog with title ${req.body.title}`)
 
   // Create a blog
   const blog = new Blog({
@@ -26,7 +28,7 @@ const createBlog = async (req, res) => {
 
   try {
     const data = await blog.save()
-    console.log('response from db:', data)
+    logObjectData('response from db:', data)
     res.send('blog sent successfully, happy blogging!!')
   } catch (err) {
     res.status(500).send({
