@@ -336,7 +336,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Blog"
+                "$ref": "#/components/schemas/CreateBlog"
               }
             }
           }
@@ -727,7 +727,7 @@
             "type": "string",
             "example": "This is a description of my first blog."
           },
-          "body": {
+          "content": {
             "type": "string",
             "example": "This is the content of my first blog."
           }
