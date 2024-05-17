@@ -51,7 +51,7 @@ router.post('/login', async (req, res) => {
     }
   } else {
     console.log('error 500', user)
-    logObjectData(user)
+    logObjectData(user, 'user info: ')
   }
 })
 
@@ -86,7 +86,7 @@ router.post('/signup', async (req, res) => {
         createdAt: Date.now(),
       }
       const insertResult = await User.create(newUser)
-      logObjectData(insertResult)
+      logObjectData(insertResult, 'user info:')
       // log info
 
       if (insertResult) {

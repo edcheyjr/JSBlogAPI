@@ -28,7 +28,7 @@ const createBlog = async (req, res) => {
 
   try {
     const data = await blog.save()
-    logObjectData('response from db:', data)
+    logObjectData(data, 'Blog created response from db:')
     res.send('blog sent successfully, happy blogging!!')
   } catch (err) {
     res.status(500).send({

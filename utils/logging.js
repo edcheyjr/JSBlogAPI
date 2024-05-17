@@ -13,12 +13,12 @@ const __dirname = path
  * Logs object data along with their corresponding datetime.
  * @param {Object} obj - Any object.
  */
-export function logObjectData(obj) {
+export function logObjectData(obj, object_title = 'Result object') {
   // Get current datetime
   const currentDate = new Date().toISOString()
 
   // Construct log message
-  const logMessage = `[${currentDate}]: Result Object, ${obj}`
+  const logMessage = `[${currentDate}]: ${object_title}, ${obj}`
 
   // // Define log file path
   // const logFilePath = path.join(__dirname, '/logs.txt')

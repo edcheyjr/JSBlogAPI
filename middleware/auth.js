@@ -11,7 +11,7 @@ const verify = (req, res, next) => {
       logMessage(`verifying token: ${token}`)
       jwt.verify(token.split(' ')[1], tokenSecret, (err, value) => {
         if (err) {
-          logObjectData(err)
+          logObjectData(err, 'error info: ')
           res.status(500).json({ error: 'failed to authenticate token' })
         } else {
           req.user = value.data
