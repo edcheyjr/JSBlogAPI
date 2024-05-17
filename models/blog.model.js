@@ -1,21 +1,21 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 
 const blogSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: false,
+    required: true,
   },
   description: {
     type: String,
-    required: true,
+    required: false,
   },
   body: {
     type: String,
-    required: false,
+    required: true,
   },
   status: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   createdAt: {
     type: Date,
@@ -29,6 +29,6 @@ const blogSchema = new mongoose.Schema({
     type: mongoose.SchemaTypes.ObjectId,
     ref: 'User',
   },
-});
+})
 
-export default mongoose.model('Blog', blogSchema);
+export default mongoose.model('Blog', blogSchema)
