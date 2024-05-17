@@ -10,9 +10,10 @@ const router = express.Router()
 
 const rounds = 10
 
-const tokenSecret = 'my-token-secret'
+const tokenSecret = process.env.JWT_TOKEN_SECRET || 'my-token-secret'
 
 router.post('/login', async (req, res) => {
+  logMessage(`attempt to login ${req.body.email}`)
   // check if its empty
   if (req.body.email == undefined || req.body.password == undefined) {
     return res.status(500).send({ error: 'data come as undefined' })
@@ -50,6 +51,7 @@ router.post('/login', async (req, res) => {
     }
   } else {
     console.log('error 500', user)
+    logObjectData(user)
   }
 })
 
@@ -73,27 +75,27 @@ router.post('/signup', async (req, res) => {
       .status(404)
       .json({ error: 'That email as already be registered' })
   } else {
-    const passwordHashed = await bcrypt.hash(password, rounds)
-    console.log('passwordHashed', passwordHashed)
-    const newUser = {
-      firstname,
-      lastname,
-      email,
-      password: passwordHashed,
-      createdAt: Date.now(),
-    }
     try {
+      const passwordHashed = await bcrypt.hash(password, rounds)
+      console.log('passwordHashed', passwordHashed)
+      const newUser = {
+        firstname,
+        lastname,
+        email,
+        password: passwordHashed,
+        createdAt: Date.now(),
+      }
       const insertResult = await User.create(newUser)
+      logObjectData(insertResult)
+      // log info
+
+      if (insertResult) {
+        res.status(200).json({ token: generateToken(newUser.email) })
+      } else {
+        res.status(500).json({ error: 'oops user was not created' })
+      }
     } catch (err) {
       res.status(500).send({ error: err.message })
-    }
-    // log info
-    logObjectData(insertResult)
-
-    if (insertResult) {
-      res.status(200).json({ token: generateToken(newUser.email) })
-    } else {
-      res.status(500).json({ error: 'oops user was not created' })
     }
   }
 })
