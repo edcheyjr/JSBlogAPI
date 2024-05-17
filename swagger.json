@@ -11,30 +11,7 @@
     }
   ],
   "paths": {
-    "/": {
-      "get": {
-        "summary": "root of the api",
-        "description": "blog api build on nodejs express  mongoose running mongodb",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/login": {
+    "/auth/login": {
       "post": {
         "tags": ["auth"],
         "summary": "Login a user",
@@ -79,7 +56,7 @@
         }
       }
     },
-    "/signup": {
+    "/auth/signup": {
       "post": {
         "tags": ["auth"],
         "summary": "Signup a new user",
@@ -121,7 +98,7 @@
         }
       }
     },
-    "/logout": {
+    "/auth/logout": {
       "get": {
         "tags": ["auth"],
         "summary": "Logout a user",
@@ -149,7 +126,7 @@
         }
       }
     },
-    "/jwt-test": {
+    "/auth/jwt-test": {
       "get": {
         "tags": ["auth"],
         "summary": "Test JWT",
