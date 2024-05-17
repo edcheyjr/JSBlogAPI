@@ -73,27 +73,27 @@ router.post('/signup', async (req, res) => {
       .status(404)
       .json({ error: 'That email as already be registered' })
   } else {
+    const passwordHashed = await bcrypt.hash(password, rounds)
+    console.log('passwordHashed', passwordHashed)
+    const newUser = {
+      firstname,
+      lastname,
+      email,
+      password: passwordHashed,
+      createdAt: Date.now(),
+    }
     try {
-      const passwordHashed = await bcrypt.hash(password, rounds)
-      console.log('passwordHashed', passwordHashed)
-      const newUser = {
-        firstname,
-        lastname,
-        email,
-        password: passwordHashed,
-        createdAt: Date.now(),
-      }
       const insertResult = await User.create(newUser)
-      // log info
-      logObjectData(insertResult)
-
-      if (insertResult) {
-        res.status(200).json({ token: generateToken(newUser.email) })
-      } else {
-        res.status(500).json({ error: 'oops user was not created' })
-      }
     } catch (err) {
       res.status(500).send({ error: err.message })
+    }
+    // log info
+    logObjectData(insertResult)
+
+    if (insertResult) {
+      res.status(200).json({ token: generateToken(newUser.email) })
+    } else {
+      res.status(500).json({ error: 'oops user was not created' })
     }
   }
 })
@@ -115,7 +115,7 @@ router.get('/jwt-test', Auth, (req, res) => {
 })
 
 function generateToken(email) {
-  return jwt.sign({ data: user }, tokenSecret, { expiresIn: '24h' })
+  return jwt.sign({ data: email }, tokenSecret, { expiresIn: '24h' })
 }
 
 export default router
