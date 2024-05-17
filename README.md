@@ -11,6 +11,10 @@ MONGO_URI = enter you db here
 
 ```
 
+# using docs
+
+go to [http://localhost:5000/docs](http://localhost:5000/docs) to view swagger ui documentation you can also test the endpoints there
+
 # how to use
 
 - test the urls from routes auth user and blog in postman
